@@ -19,7 +19,7 @@ public class MyClassLoader extends ClassLoader {
 		byte[] NewBytesArray = null;
 		byte[] bytes = null;
 		try {
-			bytes = Files.readAllBytes(new File(name).toPath());
+			bytes = Files.readAllBytes(new File(this.getClass().getResource(name).getPath()).toPath());
 			NewBytesArray = new byte[bytes.length];
 			
 			for(int i=0; i < bytes.length; i++) {
@@ -35,7 +35,7 @@ public class MyClassLoader extends ClassLoader {
 
 	public static void main(String[] args) {
 		try {
-			Class nc = new MyClassLoader().findClass("F:\\eclipseWorkspace\\jvm\\src\\week1\\Hello.xlass");
+			Class nc = new MyClassLoader().findClass("Hello.xlass");
 			Object o = nc.newInstance();
 			Method m = nc.getDeclaredMethod("hello", null);
 			m.invoke(o, null);
